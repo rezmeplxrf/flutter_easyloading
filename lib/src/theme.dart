@@ -56,7 +56,7 @@ class EasyLoadingTheme {
   /// boxShadow color of loading
   static List<BoxShadow>? get boxShadow =>
       EasyLoading.instance.loadingStyle == EasyLoadingStyle.custom
-          ? EasyLoading.instance.boxShadow ?? [BoxShadow()]
+          ? EasyLoading.instance.boxShadow ?? [const BoxShadow()]
           : null;
 
   /// font color of status
@@ -79,22 +79,22 @@ class EasyLoadingTheme {
 
   /// loading animation
   static EasyLoadingAnimation get loadingAnimation {
-    EasyLoadingAnimation _animation;
+    EasyLoadingAnimation animation;
     switch (EasyLoading.instance.animationStyle) {
       case EasyLoadingAnimationStyle.custom:
-        _animation = EasyLoading.instance.customAnimation!;
+        animation = EasyLoading.instance.customAnimation!;
         break;
       case EasyLoadingAnimationStyle.offset:
-        _animation = OffsetAnimation();
+        animation = OffsetAnimation();
         break;
       case EasyLoadingAnimationStyle.scale:
-        _animation = ScaleAnimation();
+        animation = ScaleAnimation();
         break;
       default:
-        _animation = OpacityAnimation();
+        animation = OpacityAnimation();
         break;
     }
-    return _animation;
+    return animation;
   }
 
   /// font size of status

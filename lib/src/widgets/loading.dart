@@ -29,23 +29,22 @@ class FlutterEasyLoading extends StatefulWidget {
   final Widget? child;
 
   const FlutterEasyLoading({
-    Key? key,
+    super.key,
     required this.child,
-  })  : assert(child != null),
-        super(key: key);
+  })  : assert(child != null);
 
   @override
-  _FlutterEasyLoadingState createState() => _FlutterEasyLoadingState();
+  FlutterEasyLoadingState createState() => FlutterEasyLoadingState();
 }
 
-class _FlutterEasyLoadingState extends State<FlutterEasyLoading> {
+class FlutterEasyLoadingState extends State<FlutterEasyLoading> {
   late EasyLoadingOverlayEntry _overlayEntry;
 
   @override
   void initState() {
     super.initState();
     _overlayEntry = EasyLoadingOverlayEntry(
-      builder: (BuildContext context) => EasyLoading.instance.w ?? Container(),
+      widgetbuilder: (BuildContext context) => EasyLoading.instance.w ?? Container(),
     );
     EasyLoading.instance.overlayEntry = _overlayEntry;
   }
@@ -56,7 +55,7 @@ class _FlutterEasyLoadingState extends State<FlutterEasyLoading> {
       child: Overlay(
         initialEntries: [
           EasyLoadingOverlayEntry(
-            builder: (BuildContext context) {
+            widgetbuilder: (BuildContext context) {
               if (widget.child != null) {
                 return widget.child!;
               } else {

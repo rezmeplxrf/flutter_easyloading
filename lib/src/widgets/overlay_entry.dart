@@ -27,11 +27,11 @@ import 'package:flutter/scheduler.dart';
 T? _ambiguate<T>(T? value) => value;
 
 class EasyLoadingOverlayEntry extends OverlayEntry {
-  final WidgetBuilder builder;
+  final WidgetBuilder widgetbuilder;
 
   EasyLoadingOverlayEntry({
-    required this.builder,
-  }) : super(builder: builder);
+    required this.widgetbuilder,
+  }) : super(builder: widgetbuilder);
 
   @override
   void markNeedsBuild() {

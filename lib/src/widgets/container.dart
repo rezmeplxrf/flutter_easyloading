@@ -41,7 +41,7 @@ class EasyLoadingContainer extends StatefulWidget {
   final bool animation;
 
   const EasyLoadingContainer({
-    Key? key,
+    super.key,
     this.indicator,
     this.status,
     this.dismissOnTap,
@@ -49,7 +49,7 @@ class EasyLoadingContainer extends StatefulWidget {
     this.maskType,
     this.completer,
     this.animation = true,
-  }) : super(key: key);
+  });
 
   @override
   EasyLoadingContainerState createState() => EasyLoadingContainerState();
@@ -101,7 +101,7 @@ class EasyLoadingContainerState extends State<EasyLoadingContainer>
 
   Future<void> show(bool animation) {
     if (isPersistentCallbacks) {
-      Completer<void> completer = Completer<void>();
+      Completer<TickerFuture> completer = Completer<TickerFuture>();
       _ambiguate(SchedulerBinding.instance)!.addPostFrameCallback((_) =>
           completer
               .complete(_animationController.forward(from: animation ? 0 : 1)));
@@ -113,7 +113,7 @@ class EasyLoadingContainerState extends State<EasyLoadingContainer>
 
   Future<void> dismiss(bool animation) {
     if (isPersistentCallbacks) {
-      Completer<void> completer = Completer<void>();
+      Completer<TickerFuture> completer = Completer<TickerFuture>();
       _ambiguate(SchedulerBinding.instance)!.addPostFrameCallback((_) =>
           completer
               .complete(_animationController.reverse(from: animation ? 1 : 0)));

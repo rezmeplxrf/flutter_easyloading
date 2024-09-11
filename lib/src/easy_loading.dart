@@ -27,7 +27,6 @@ import 'package:flutter/material.dart';
 
 import './widgets/container.dart';
 import './widgets/progress.dart';
-import './widgets/indicator.dart';
 import './widgets/overlay_entry.dart';
 import './widgets/loading.dart';
 import './animations/animation.dart';
@@ -179,7 +178,7 @@ class EasyLoading {
   bool? dismissOnTap;
 
   /// indicator widget of loading
-  Widget? indicatorWidget;
+   late Widget indicatorWidget;
 
   /// success widget of loading
   Widget? successWidget;
@@ -208,6 +207,7 @@ class EasyLoading {
   static final EasyLoading _instance = EasyLoading._internal();
 
   EasyLoading._internal() {
+    indicatorWidget = const CircularProgressIndicator();
     /// set deafult value
     loadingStyle = EasyLoadingStyle.dark;
     indicatorType = EasyLoadingIndicatorType.fadingCircle;
@@ -252,7 +252,7 @@ class EasyLoading {
     EasyLoadingMaskType? maskType,
     bool? dismissOnTap,
   }) {
-    Widget w = indicator ?? (_instance.indicatorWidget ?? LoadingIndicator());
+    Widget w = indicator ?? _instance.indicatorWidget;
     return _instance._show(
       status: status,
       maskType: maskType,
@@ -281,10 +281,10 @@ class EasyLoading {
 
     if (_instance.w == null || _instance.progressKey == null) {
       if (_instance.key != null) await dismiss(animation: false);
-      GlobalKey<EasyLoadingProgressState> _progressKey =
+      GlobalKey<EasyLoadingProgressState> progressKey =
           GlobalKey<EasyLoadingProgressState>();
       Widget w = EasyLoadingProgress(
-        key: _progressKey,
+        key: progressKey,
         value: value,
       );
       _instance._show(
@@ -293,7 +293,7 @@ class EasyLoading {
         dismissOnTap: false,
         w: w,
       );
-      _instance._progressKey = _progressKey;
+      _instance._progressKey = progressKey;
     }
     // update progress
     _instance.progressKey?.currentState?.updateProgress(min(1.0, value));
