@@ -10,8 +10,6 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  flutter_hooks: ^0.20.5
-  hooks_riverpod: ^2.5.2
 
 dev_dependencies:
   flutter_lints: ^4.0.0
